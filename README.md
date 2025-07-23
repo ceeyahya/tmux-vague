@@ -8,15 +8,11 @@ set -g @gruvbox-theme dark # dark or light
 
 # Optional: Configure GitHub status display (default: on)
 set -g @gruvbox-tmux_github_status on # on or off
-
-# Optional: Enable curved session name (default: off)
-set -g @gruvbox-tmux_session_curved on # on or off
 ```
 
 ## Features
 
 - **Git Status**: Shows current branch, sync status, and change counts
-- **Curved Session Name**: Optional curved/rounded border on the right side of the session name
 - **GitHub Integration**: Displays open pull requests and issues count for the current repository
   - 󰘬 Pull requests (magenta)
   - 󰌶 Issues (red)
