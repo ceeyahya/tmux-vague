@@ -28,6 +28,7 @@ default_pane_id_style="hsquare"
 default_zoom_id_style="dsquare"
 default_github_status="on"
 default_session_bg="on"
+default_session_curved="off"
 default_window_center="off"
 
 window_id_style="$(echo "$TMUX_VARS" | grep '@gruvbox-tmux_window_id_style' | cut -d" " -f2)"
@@ -35,12 +36,14 @@ pane_id_style="$(echo "$TMUX_VARS" | grep '@gruvbox-tmux_pane_id_style' | cut -d
 zoom_id_style="$(echo "$TMUX_VARS" | grep '@gruvbox-tmux_zoom_id_style' | cut -d" " -f2)"
 github_status_enabled="$(echo "$TMUX_VARS" | grep '@gruvbox-tmux_github_status' | cut -d" " -f2)"
 session_bg_enabled="$(echo "$TMUX_VARS" | grep '@gruvbox-tmux_session_bg' | cut -d" " -f2)"
+session_curved_enabled="$(echo "$TMUX_VARS" | grep '@gruvbox-tmux_session_curved' | cut -d" " -f2)"
 window_center_enabled="$(echo "$TMUX_VARS" | grep '@gruvbox-tmux_window_center' | cut -d" " -f2)"
 window_id_style="${window_id_style:-$default_window_id_style}"
 pane_id_style="${pane_id_style:-$default_pane_id_style}"
 zoom_id_style="${zoom_id_style:-$default_zoom_id_style}"
 github_status_enabled="${github_status_enabled:-$default_github_status}"
 session_bg_enabled="${session_bg_enabled:-$default_session_bg}"
+session_curved_enabled="${session_curved_enabled:-$default_session_curved}"
 window_center_enabled="${window_center_enabled:-$default_window_center}"
 
 git_status="#($SCRIPTS_PATH/git-status.sh #{pane_current_path})"
@@ -58,7 +61,13 @@ current_path="#($SCRIPTS_PATH/path-widget.sh #{pane_current_path})"
 # Session name
 if [[ "$session_bg_enabled" == "on" ]]; then
     # Session name with background
-    tmux set -g status-left "#[fg=${THEME[bblack]},bg=${THEME[blue]},bold] #{?client_prefix,󰠠 ,#[dim]󰤂 }#[bold,nodim]#S "
+    if [[ "$session_curved_enabled" == "on" ]]; then
+        # Add curved border on the right
+        tmux set -g status-left "#[fg=${THEME[bblack]},bg=${THEME[blue]},bold] #{?client_prefix,󰠠 ,#[dim]󰤂 }#[bold,nodim]#S #[fg=${THEME[blue]},bg=${THEME[background]},nobold]"
+    else
+        # Regular rectangular border
+        tmux set -g status-left "#[fg=${THEME[bblack]},bg=${THEME[blue]},bold] #{?client_prefix,󰠠 ,#[dim]󰤂 }#[bold,nodim]#S "
+    fi
 else
     # Session name without background (transparent)
     tmux set -g status-left "#[fg=${THEME[foreground]},bg=${THEME[background]},bold] #{?client_prefix,󰠠 ,#[dim] }#[bold,nodim]#S "
