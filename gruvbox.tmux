@@ -63,7 +63,7 @@ if [[ "$session_bg_enabled" == "on" ]]; then
     # Session name with background
     if [[ "$session_curved_enabled" == "on" ]]; then
         # Rounded corners for session name
-        tmux set -g status-left "#[fg=${THEME[blue]},bg=${THEME[background]}]#[fg=${THEME[bblack]},bg=${THEME[blue]},bold] #{?client_prefix,󰠠 ,#[dim]󰤂 }#[bold,nodim]#S #[fg=${THEME[blue]},bg=${THEME[background]}]"
+        tmux set -g status-left "#[fg=${THEME[blue]},bg=${THEME[background]}]▐#[fg=${THEME[bblack]},bg=${THEME[blue]},bold] #{?client_prefix,󰠠 ,#[dim]󰤂 }#[bold,nodim]#S #[fg=${THEME[blue]},bg=${THEME[background]}]▌"
     else
         # Regular rectangular border
         tmux set -g status-left "#[fg=${THEME[bblack]},bg=${THEME[blue]},bold] #{?client_prefix,󰠠 ,#[dim]󰤂 }#[bold,nodim]#S "
@@ -76,7 +76,7 @@ fi
 #+--- Windows ---+
 # Focus
 if [[ "$session_curved_enabled" == "on" ]]; then
-    tmux set -g window-status-current-format "$RESET#[fg=${THEME[bblack]},bg=${THEME[background]}]#[fg=${THEME[green]},bg=${THEME[bblack]}] #{?#{==:#{pane_current_command},ssh},󰣀,} #[fg=${THEME[foreground]},bold,nodim]$window_number #W#[nobold]#{?window_zoomed_flag, $zoom_number, $custom_pane} #{?window_last_flag,,} #[fg=${THEME[bblack]},bg=${THEME[background]}]"
+    tmux set -g window-status-current-format "$RESET#[fg=${THEME[bblack]},bg=${THEME[background]}]▐#[fg=${THEME[green]},bg=${THEME[bblack]}] #{?#{==:#{pane_current_command},ssh},󰣀,} #[fg=${THEME[foreground]},bold,nodim]$window_number #W#[nobold]#{?window_zoomed_flag, $zoom_number, $custom_pane} #{?window_last_flag,,} #[fg=${THEME[bblack]},bg=${THEME[background]}]▌"
 else
     tmux set -g window-status-current-format "$RESET#[fg=${THEME[green]},bg=${THEME[bblack]}] #{?#{==:#{pane_current_command},ssh},󰣀,} #[fg=${THEME[foreground]},bold,nodim]$window_number #W#[nobold]#{?window_zoomed_flag, $zoom_number, $custom_pane} #{?window_last_flag,,} "
 fi
