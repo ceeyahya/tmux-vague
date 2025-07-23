@@ -62,8 +62,8 @@ current_path="#($SCRIPTS_PATH/path-widget.sh #{pane_current_path})"
 if [[ "$session_bg_enabled" == "on" ]]; then
     # Session name with background
     if [[ "$session_curved_enabled" == "on" ]]; then
-        # Add curved border on the right
-        tmux set -g status-left "#[fg=${THEME[bblack]},bg=${THEME[blue]},bold] #{?client_prefix,󰠠 ,#[dim]󰤂 }#[bold,nodim]#S#[fg=${THEME[blue]},bg=${THEME[background]},nobold]󰧟"
+        # Rounded corners for session name
+        tmux set -g status-left "#[fg=${THEME[blue]},bg=${THEME[background]}]#[fg=${THEME[bblack]},bg=${THEME[blue]},bold] #{?client_prefix,󰠠 ,#[dim]󰤂 }#[bold,nodim]#S #[fg=${THEME[blue]},bg=${THEME[background]}]"
     else
         # Regular rectangular border
         tmux set -g status-left "#[fg=${THEME[bblack]},bg=${THEME[blue]},bold] #{?client_prefix,󰠠 ,#[dim]󰤂 }#[bold,nodim]#S "
@@ -75,9 +75,13 @@ fi
 
 #+--- Windows ---+
 # Focus
-tmux set -g window-status-current-format "$RESET#[fg=${THEME[green]},bg=${THEME[bblack]}] #{?#{==:#{pane_current_command},ssh},󰣀,} #[fg=${THEME[foreground]},bold,nodim]$window_number #W#[nobold]#{?window_zoomed_flag, $zoom_number, $custom_pane} #{?window_last_flag,,} "
+if [[ "$session_curved_enabled" == "on" ]]; then
+    tmux set -g window-status-current-format "$RESET#[fg=${THEME[bblack]},bg=${THEME[background]}]#[fg=${THEME[green]},bg=${THEME[bblack]}] #{?#{==:#{pane_current_command},ssh},󰣀,} #[fg=${THEME[foreground]},bold,nodim]$window_number #W#[nobold]#{?window_zoomed_flag, $zoom_number, $custom_pane} #{?window_last_flag,,} #[fg=${THEME[bblack]},bg=${THEME[background]}]"
+else
+    tmux set -g window-status-current-format "$RESET#[fg=${THEME[green]},bg=${THEME[bblack]}] #{?#{==:#{pane_current_command},ssh},󰣀,} #[fg=${THEME[foreground]},bold,nodim]$window_number #W#[nobold]#{?window_zoomed_flag, $zoom_number, $custom_pane} #{?window_last_flag,,} "
+fi
 # Unfocused
-tmux set -g window-status-format "$RESET#[fg=${THEME[foreground]}] #{?#{==:#{pane_current_command},ssh},󰣀,}${RESET} $window_number #W#[nobold,dim]#{?window_zoomed_flag, $zoom_number, $custom_pane} #[fg=${THEME[yellow]}]#{?window_last_flag,󰁯 , } "
+tmux set -g window-status-format "$RESET#[fg=${THEME[foreground]}] #{?#{==:#{pane_current_command},ssh},󰣀,}${RESET} $window_number #W#[nobold,dim]#{?window_zoomed_flag, $zoom_number, $custom_pane} #[fg=${THEME[yellow]}]#{?window_last_flag,󰁯 , } "
 
 #+--- Bars RIGHT ---+
 tmux set -g status-right "$current_path$git_status$github_status"
