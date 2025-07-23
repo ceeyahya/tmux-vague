@@ -63,7 +63,7 @@ if [[ "$session_bg_enabled" == "on" ]]; then
     # Session name with background
     if [[ "$session_curved_enabled" == "on" ]]; then
         # Add curved border on the right
-        tmux set -g status-left "#[fg=${THEME[bblack]},bg=${THEME[blue]},bold] #{?client_prefix,󰠠 ,#[dim]󰤂 }#[bold,nodim]#S #[fg=${THEME[blue]},bg=${THEME[background]},nobold]"
+        tmux set -g status-left "#[fg=${THEME[bblack]},bg=${THEME[blue]},bold] #{?client_prefix,󰠠 ,#[dim]󰤂 }#[bold,nodim]#S#[fg=${THEME[blue]},bg=${THEME[background]},nobold]󰧟"
     else
         # Regular rectangular border
         tmux set -g status-left "#[fg=${THEME[bblack]},bg=${THEME[blue]},bold] #{?client_prefix,󰠠 ,#[dim]󰤂 }#[bold,nodim]#S "
