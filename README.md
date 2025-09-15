@@ -1,13 +1,13 @@
-this is a simpified fork of https://github.com/janoamaral/tokyo-night-tmux all credit goes to the author ❤️.
+this is a fork of the simpified fork of https://github.com/janoamaral/tokyo-night-tmux all credit goes to the author ❤️.
 
-I updated the colors to match the gruvbox colorscheme used in neovim and ghostty terminal.
+I updated the colors to match the vague colorscheme used in neovim and ghostty terminal.
 
 ```
-set -g @plugin "adibhanna/gruvbox-tmux"
-set -g @gruvbox-theme dark # dark or light
+set -g @plugin "ceeyahya/tmux-vague"
+set -g @tmux-vague dark # dark or light
 
 # Optional: Configure GitHub status display (default: on)
-set -g @gruvbox-tmux_github_status on # on or off
+set -g @tmux-vague_github_status on # on or off
 ```
 
 ## Features
