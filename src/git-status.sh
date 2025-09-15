@@ -33,19 +33,19 @@ fi
 UNTRACKED_COUNT="$(git ls-files --other --directory --exclude-standard | wc -l | bc)"
 
 if [[ $CHANGED_COUNT -gt 0 ]]; then
-  STATUS_CHANGED="${RESET}#[fg=${THEME_yellow},bg=${THEME_background},bold] ${CHANGED_COUNT} "
+  STATUS_CHANGED="${RESET}#[fg=${THEME_yellow},bg=${THEME_background},bold] *${CHANGED_COUNT} "
 fi
 
 if [[ $INSERTIONS_COUNT -gt 0 ]]; then
-  STATUS_INSERTIONS="${RESET}#[fg=${THEME_green},bg=${THEME_background},bold] ${INSERTIONS_COUNT} "
+  STATUS_INSERTIONS="${RESET}#[fg=${THEME_green},bg=${THEME_background},bold] +${INSERTIONS_COUNT} "
 fi
 
 if [[ $DELETIONS_COUNT -gt 0 ]]; then
-  STATUS_DELETIONS="${RESET}#[fg=${THEME_red},bg=${THEME_background},bold] ${DELETIONS_COUNT} "
+  STATUS_DELETIONS="${RESET}#[fg=${THEME_red},bg=${THEME_background},bold] -${DELETIONS_COUNT} "
 fi
 
 if [[ $UNTRACKED_COUNT -gt 0 ]]; then
-  STATUS_UNTRACKED="${RESET}#[fg=${THEME_foreground},bg=${THEME_background},bold] ${UNTRACKED_COUNT} "
+  STATUS_UNTRACKED="${RESET}#[fg=${THEME_foreground},bg=${THEME_background},bold] ?${UNTRACKED_COUNT} "
 fi
 
 # Determine repository sync status
@@ -73,16 +73,16 @@ fi
 # Set the status indicator based on the sync mode
 case "$SYNC_MODE" in
 1)
-  REMOTE_STATUS="$RESET#[bg=${THEME_background},fg=${THEME_bred},bold]▒ 󱓎"
+  REMOTE_STATUS="$RESET#[bg=${THEME_background},fg=${THEME_bred},bold] ~"
   ;;
 2)
-  REMOTE_STATUS="$RESET#[bg=${THEME_background},fg=${THEME_red},bold]▒ 󰛃"
+  REMOTE_STATUS="$RESET#[bg=${THEME_background},fg=${THEME_red},bold] ↑"
   ;;
 3)
-  REMOTE_STATUS="$RESET#[bg=${THEME_background},fg=${THEME_magenta},bold]▒ 󰛀"
+  REMOTE_STATUS="$RESET#[bg=${THEME_background},fg=${THEME_magenta},bold] ↓"
   ;;
 *)
-  REMOTE_STATUS="$RESET#[bg=${THEME_background},fg=${THEME_green},bold]▒ "
+  REMOTE_STATUS="$RESET#[bg=${THEME_background},fg=${THEME_green},bold] ✓"
   ;;
 esac
 
