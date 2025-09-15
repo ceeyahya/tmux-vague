@@ -18,7 +18,7 @@ set -g @tmux-vague_github_status on # on or off
   - 󰌶 Issues (red)
   - Requires GitHub CLI (`gh`) for authenticated requests or falls back to unauthenticated API calls
   - Results are cached for 5 minutes to improve performance
-  - Can be disabled with `set -g @gruvbox-tmux_github_status off`
+  - Can be disabled with `set -g @tmux-vague_github_status off`
 - **Custom Window Numbers**: Configurable window and pane number styles
 - **Path Widget**: Shows current directory path
 

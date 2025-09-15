@@ -6,7 +6,7 @@ source "$CURRENT_DIR/themes.sh"
 
 cd "$1" || exit 1
 
-RESET="#[fg=${THEME[foreground]},bg=${THEME[background]},nobold,noitalics,nounderscore,nodim]"
+RESET="#[fg=${THEME_foreground},bg=${THEME_background},nobold,noitalics,nounderscore,nodim]"
 
 # Cache settings
 CACHE_DIR="${HOME}/.cache/gruvbox-tmux"
@@ -94,11 +94,11 @@ ISSUE_ICON="󰌶"
 GITHUB_STATUS=""
 
 if [[ $PR_COUNT -gt 0 ]]; then
-    GITHUB_STATUS="${GITHUB_STATUS}${RESET}#[fg=${THEME[ghmagenta]},bg=${THEME[background]},bold]▒ ${PR_ICON} ${PR_COUNT} "
+    GITHUB_STATUS="${GITHUB_STATUS}${RESET}#[fg=${THEME_ghmagenta},bg=${THEME_background},bold]▒ ${PR_ICON} ${PR_COUNT} "
 fi
 
 if [[ $ISSUE_COUNT -gt 0 ]]; then
-    GITHUB_STATUS="${GITHUB_STATUS}${RESET}#[fg=${THEME[ghred]},bg=${THEME[background]},bold]▒ ${ISSUE_ICON} ${ISSUE_COUNT} "
+    GITHUB_STATUS="${GITHUB_STATUS}${RESET}#[fg=${THEME_ghred},bg=${THEME_background},bold]▒ ${ISSUE_ICON} ${ISSUE_COUNT} "
 fi
 
 # Only output if we have something to show

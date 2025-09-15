@@ -8,18 +8,18 @@ source $SCRIPTS_PATH/themes.sh
 tmux set -g status-left-length 80
 tmux set -g status-right-length 150
 
-RESET="#[fg=${THEME[foreground]},bg=${THEME[background]},nobold,noitalics,nounderscore,nodim]"
+RESET="#[fg=${THEME_foreground},bg=${THEME_background},nobold,noitalics,nounderscore,nodim]"
 # Highlight colors
-tmux set -g mode-style "fg=${THEME[bgreen]},bg=${THEME[bblack]}"
+tmux set -g mode-style "fg=${THEME_bgreen},bg=${THEME_bblack}"
 
-tmux set -g message-style "bg=${THEME[blue]},fg=${THEME[background]}"
-tmux set -g message-command-style "fg=${THEME[white]},bg=${THEME[black]}"
+tmux set -g message-style "bg=${THEME_blue},fg=${THEME_background}"
+tmux set -g message-command-style "fg=${THEME_white},bg=${THEME_black}"
 
-tmux set -g pane-border-style "fg=${THEME[bblack]}"
-tmux set -g pane-active-border-style "fg=${THEME[blue]}"
+tmux set -g pane-border-style "fg=${THEME_bblack}"
+tmux set -g pane-active-border-style "fg=${THEME_blue}"
 tmux set -g pane-border-status off
 
-tmux set -g status-style bg="${THEME[background]}"
+tmux set -g status-style bg="${THEME_background}"
 
 TMUX_VARS="$(tmux show -g)"
 
@@ -30,12 +30,12 @@ default_github_status="on"
 default_session_bg="on"
 default_window_center="off"
 
-window_id_style="$(echo "$TMUX_VARS" | grep '@gruvbox-tmux_window_id_style' | cut -d" " -f2)"
-pane_id_style="$(echo "$TMUX_VARS" | grep '@gruvbox-tmux_pane_id_style' | cut -d" " -f2)"
-zoom_id_style="$(echo "$TMUX_VARS" | grep '@gruvbox-tmux_zoom_id_style' | cut -d" " -f2)"
-github_status_enabled="$(echo "$TMUX_VARS" | grep '@gruvbox-tmux_github_status' | cut -d" " -f2)"
-session_bg_enabled="$(echo "$TMUX_VARS" | grep '@gruvbox-tmux_session_bg' | cut -d" " -f2)"
-window_center_enabled="$(echo "$TMUX_VARS" | grep '@gruvbox-tmux_window_center' | cut -d" " -f2)"
+window_id_style="$(echo "$TMUX_VARS" | grep '@tmux-vague_window_id_style' | cut -d" " -f2)"
+pane_id_style="$(echo "$TMUX_VARS" | grep '@tmux-vague_pane_id_style' | cut -d" " -f2)"
+zoom_id_style="$(echo "$TMUX_VARS" | grep '@tmux-vague_zoom_id_style' | cut -d" " -f2)"
+github_status_enabled="$(echo "$TMUX_VARS" | grep '@tmux-vague_github_status' | cut -d" " -f2)"
+session_bg_enabled="$(echo "$TMUX_VARS" | grep '@tmux-vague_session_bg' | cut -d" " -f2)"
+window_center_enabled="$(echo "$TMUX_VARS" | grep '@tmux-vague_window_center' | cut -d" " -f2)"
 window_id_style="${window_id_style:-$default_window_id_style}"
 pane_id_style="${pane_id_style:-$default_pane_id_style}"
 zoom_id_style="${zoom_id_style:-$default_zoom_id_style}"
@@ -58,17 +58,17 @@ current_path="#($SCRIPTS_PATH/path-widget.sh #{pane_current_path})"
 # Session name
 if [[ "$session_bg_enabled" == "on" ]]; then
     # Session name with background
-    tmux set -g status-left "#[fg=${THEME[bblack]},bg=${THEME[blue]},bold] #{?client_prefix,󰠠 ,#[dim]󰤂 }#[bold,nodim]#S "
+    tmux set -g status-left "#[fg=${THEME_bblack},bg=${THEME_blue},bold] #{?client_prefix,󰠠 ,#[dim]󰤂 }#[bold,nodim]#S "
 else
     # Session name without background (transparent)
-    tmux set -g status-left "#[fg=${THEME[foreground]},bg=${THEME[background]},bold] #{?client_prefix,󰠠 ,#[dim] }#[bold,nodim]#S "
+    tmux set -g status-left "#[fg=${THEME_foreground},bg=${THEME_background},bold] #{?client_prefix,󰠠 ,#[dim] }#[bold,nodim]#S "
 fi
 
 #+--- Windows ---+
 # Focus
-tmux set -g window-status-current-format "$RESET#[fg=${THEME[green]},bg=${THEME[bblack]}] #{?#{==:#{pane_current_command},ssh},󰣀,} #[fg=${THEME[foreground]},bold,nodim]$window_number #W#[nobold]#{?window_zoomed_flag, $zoom_number, $custom_pane} #{?window_last_flag,,} "
+tmux set -g window-status-current-format "$RESET#[fg=${THEME_green},bg=${THEME_bblack}] #{?#{==:#{pane_current_command},ssh},󰣀,} #[fg=${THEME_foreground},bold,nodim]$window_number #W#[nobold]#{?window_zoomed_flag, $zoom_number, $custom_pane} #{?window_last_flag,,} "
 # Unfocused
-tmux set -g window-status-format "$RESET#[fg=${THEME[foreground]}] #{?#{==:#{pane_current_command},ssh},󰣀,}${RESET} $window_number #W#[nobold,dim]#{?window_zoomed_flag, $zoom_number, $custom_pane} #[fg=${THEME[yellow]}]#{?window_last_flag,󰁯 , } "
+tmux set -g window-status-format "$RESET#[fg=${THEME_foreground}] #{?#{==:#{pane_current_command},ssh},󰣀,}${RESET} $window_number #W#[nobold,dim]#{?window_zoomed_flag, $zoom_number, $custom_pane} #[fg=${THEME_yellow}]#{?window_last_flag,󰁯 , } "
 
 #+--- Bars RIGHT ---+
 tmux set -g status-right "$current_path$git_status$github_status"
